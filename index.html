@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Rapid Web Application Development with Python/Django</title>
+
+		<meta name="description" content="Introduction to Python/Django">
+		<meta name="author" content="Chamindu R. Munasinghe">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Rapid Web Application Development With Python/Django</h2>
+					<p>
+						<small>Chamindu R. Munasinghe</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Agenda</h2>
+          <ul>
+            <li>Python</li>
+            <li>PyPi &amp; pip</li>
+            <li>virtualenv</li>
+          </ul>
+
+				</section>
+        <section>
+          <section>
+            <h2>Python</h2>
+            <ul>
+              <li>Open source</li>
+              <li>Cross platform</li>
+              <li>General purpose</li>
+              <li>Dynamic</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Python</h2>
+            <ul>
+              <li>Object oriented</li>
+              <li>Procedural</li>
+              <li>Functional</li>
+            </ul>
+          </section>
+          <section>
+            <h2>&quot;Batteries Included&quot;</h2>
+          </section>
+          <section>
+            <h2>Python 2.7 vs Python 3</h2>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>PyPi</h2>
+            <p>Python package index</p>
+            <p>A repository of around 51k packages</p>
+          </section>
+          <section>
+            <h2>pip</h2>
+            <p>Package manager for Python</p>
+            <pre>
+              <code class="shell">
+              $ pip install django
+              $ pip install -r requirements.txt
+              </code>
+            </pre>
+          </section>
+        </section>
+        <section>
+          <section>
+             <h2>virtualenv</h2>
+          </section>
+          <section>
+            <h2>One global python environment</h2>
+            <object type="image/svg+xml" data="img/global-env.svg"></object>
+          </section>
+          <section>
+            <p>Cannot run multiple python versions</p>
+            <p>All apps share same packages and versions</p>
+          </section>
+          <section>
+            <h2>Using virtuanenv</h2>
+            <object type="image/svg+xml" data="img/virtual-env.svg"></object>
+          </section>
+          <section>
+            <h2>virtualenvwrapper</h2>
+            <p>A command line tool to easoly manage virtualenv's in development</p>
+          </section>
+        </section>
+        <section>
+          <section>
+             <h2>Django</h2>
+             <p>&quot;The Web framework for perfectionists with deadlines&quot;</p>
+          </section>
+          <section>
+            <h2>Used by</h2>
+            <p>Disqus, Instagram, Pinterest, Bitbucket and many more</p>
+          </section>
+          <section>
+            <h2>Modular</h2>
+            <ul>
+              <li>A &quot;project&quot; comprises of many &quot;apps&quot;</li>
+              <li>
+                Third party apps that can be plugged into a Django project
+                <ul>
+                  <li>Blogs</li>
+                  <li>Calendars</li>
+                  <li>CMS's</li>
+                </ul>
+              </li>
+              <li>http://www.djangopackages.com</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Architecture</h2>
+            <ul>
+              <li>MVT - Model, View, Template</li>
+              <li>Views are python functions</li>
+              <li>Built in ORM</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Demo</h2>
+            <p>Create a simple &quot;polls&quot; app</p>
+          </section>
+          <section>
+            <h2>Creating the project</h2>
+            <p><pre><code>$ django-admin.py startproject mysite</code></pre></p>
+          </section>
+          <section>
+            <h2>Database setup</h2>
+            <p>The app is already configured to use sqlite</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Create &quot;polls&quot; app</h2>
+            <p><pre><code>$ python manage.py startapp polls</code></pre></p>
+            <p><small>Add it to the INSTALLED_APPS</small></p>
+          </section>
+          <section>
+            <h2>Creating the Models</h2>
+            <p><pre><code class="python">
+            class Question(models.Model):
+                question_text = models.CharField(max_length=200)
+                pub_date = models.DateTimeField('date published')
+
+            class Choice(models.Model):
+                question = models.ForeignKey(Question)
+                choice_text = models.CharField(max_length=200)
+                votes = models.IntegerField(default=0)
+            </code></pre></p>
+          </section>
+          <section>
+            <h2>Create and apply Migrations</h2>
+            <p><pre><code>
+              $ python manage.py makemigrations polls
+              $ python manage.py migrate
+            </code></pre></p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Exploring the admin app</h2>
+            <p>Basic CRUD operations with zero code</p>
+            <p><pre><code class="python">
+            from django.contrib import admin
+            from polls.models import Question
+ 
+            admin.site.register(Question)
+            </code></pre></p>
+          </section>
+          <section>
+            <h2>Adding &quot;Choices&quot; to the admin</h2>
+            <p><pre><code class="python">
+            from django.contrib import admin
+            from polls.models import Question, Choice
+
+            class ChoiceInline(admin.StackedInline):
+                model = Choice
+                extra = 3
+
+            class QuestionAdmin(admin.ModelAdmin):
+                inlines = [ChoiceInline]
+
+            admin.site.register(Question, QuestionAdmin)
+            </code></pre></p>
+          </section> 
+        </section>
+        <section>
+          <section>
+            <h2>Creating our first view</h2>
+            <p><pre><code class="python">
+            from django.http import HttpResponse
+
+            def index(request):
+                return HttpResponse("Hello, world. You're at the polls index.")
+            </code></pre></p>
+          </section>
+          <section>
+            <h2>URL mapping</h2>
+            <p><pre><code class="python">
+            # polls/urls.py
+            from django.conf.urls import patterns, url
+            from polls import views
+
+            urlpatterns = patterns('', 
+                url(r'^$', views.index, name='index'),
+            )
+            </code></pre></p>
+            <p><pre><code class="python">
+            # urls.py
+            from django.conf.urls import patterns, include, url
+            from django.contrib import admin
+
+            urlpatterns = patterns('',
+                url(r'^polls/', include('polls.urls')),
+                url(r'^admin/', include(admin.site.urls)),
+            )           
+            </code></pre></p>
+          </section>
+        </section>
+        <section>
+          <h2>Using generic views<h2>
+        </section>
+
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
