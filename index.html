@@ -47,6 +47,7 @@
 					<p>
 						<small>Chamindu R. Munasinghe</small>
 					</p>
+          <img style="border:none" src="img/calcey_logo.png"></img>
 				</section>
 
 				<section>
@@ -257,10 +258,71 @@
           </section>
         </section>
         <section>
-          <h2>Using generic views<h2>
+          <section>
+            <h2>Using generic views<h2>
+          </section>
+          <section>
+            <h2>Generic ListView</h2>
+            <p><pre><code class="python">
+            class IndexView(generic.ListView):
+                model = Question
+            </code></pre></p>
+          </section>
+          <section>
+            <h2>Creating a template</h2>
+            <p><pre><code class="html">
+            &lt;html&gt;
+              &lt;head&gt;&lt;/head&gt;
+              &lt;body&gt;
+                &lt;ul&gt;
+                  {% for question in object_list %}
+                    &lt;li&gt;&lt;a href=&quot;{% url &#39;detail&#39; question.id %}&quot;&gt;
+                    {{ question.question_text }}
+                    &lt;/a&gt;&lt;/li&gt;
+                  {% empty %}
+                    &lt;li&gt;No polls&lt;/li&gt;
+                  {% endfor %}
+                &lt;/ul&gt;
+              &lt;/body&gt;       
+            &lt;/html&gt;
+            </code></pre></p>
+          </section>
         </section>
-
-
+        <section>
+          <h2>What we did not cover</h2>
+          <ul>
+            <li>More generic views CreateView, UpdateView, DeleteView</li>
+            <li>Forms</li>
+            <li>Authentication &amp; Authorization</li>
+            <li>Middleware</li>
+            <li>Templates in depth</li>
+            <li>Caching</li>
+            <li>Management commands</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Hosting Django</h2>
+          <p>nginx and uWSGI recommended</p>
+        </section>
+        <section>
+          <h2>Some interesting tools</h2>
+          <ul>
+            <li>django-rest-framework - Easy REST API's</li>
+            <li>django-crispy-forms - Beautifull looking forms</li>
+            <li>django-oauth-toolkit - OAuth support</li>
+            <li>django-debug-toolbar - Debugging tool</li>
+            <li>django-reversion - Version control for Models</li>
+            <li>django-guardian - Record level permissions</li>
+            <li>django-extentions - Lot of usefull extensions</li>
+            <li>Celery - Async, distributed job queues</li>
+          </ul>
+        </section>
+        <section>
+          <h1>Questions?</h1>
+        </section>
+        <section>
+          <h1>Thank You</h1>
+        </section>
 			</div>
 
 		</div>
